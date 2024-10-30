@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pneumonia detection system</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Link to external CSS file -->
+</head>
+
+<body>
+    <h1 class="text-center">PneumoInsight</h1>
+    <form class="p-3 text-center" action="/" method="post" enctype="multipart/form-data">
+        <input class="form-control" type="file" name="imagefile">
+        <input class="btn btn-primary mt-3" type="submit" value="Predict Image">
+    </form>
+    {% if error %}
+    <div class="container mt-3">
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    </div>
+    {% endif %}
+    {% if prediction %}
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6 analysis-report">
+                    <h2 class="text-center">Analysis Report</h2>
+                    <hr>
+                    <div class="text-center">
+                        <img src="{{ image_path }}" class="img-fluid" alt="Uploaded Image">
+                    </div>
+                    <div class="mt-3">
+                        <p><strong>Uploaded Image:</strong> {{ filename }}</p>
+                        <p><strong>Prediction:</strong> {{ prediction }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <footer class="footer text-center">
+        <div class="container">
+            <p>Do not completely rely on our results. For any doubts or further clarifications, please consult a <i style='color:rgb(4, 40, 118)'>doctor</i>.</p>
+        </div>
+    </footer>
+</body>
+</html>
